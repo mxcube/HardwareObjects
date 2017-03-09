@@ -460,7 +460,7 @@ class DataCollection(TaskNode):
                 'num_passes': parameters.num_passes,
                 'path': path_template.directory,
                 'centred_position': parameters.centred_position,
-                'energy': parameters.energy,
+                'energy': float(parameters.energy),
                 'resolution': parameters.resolution,
                 'transmission': parameters.transmission,
                 'detector_mode': parameters.detector_mode,
@@ -1125,7 +1125,7 @@ class AcquisitionParameters(object):
         self.kappa_phi = float()
         self.exp_time = float()
         self.num_passes = int()
-        self.energy = int()
+        self.energy = float()
         self.centred_position = CentredPosition()
         self.resolution = float()
         self.transmission = float()
@@ -1300,7 +1300,7 @@ def to_collect_dict(data_collection, session, sample, centred_pos=None):
              #'scan4d': 0,
              'resolution': {'upper': acq_params.resolution},
              'transmission': acq_params.transmission,
-             'energy': acq_params.energy,
+             'energy': float(acq_params.energy),
              #'input_files': 1,
              'oscillation_sequence': [{'exposure_time': acq_params.exp_time,
                                        #'kappaStart': 0.0,
