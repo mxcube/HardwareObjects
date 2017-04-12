@@ -238,6 +238,7 @@ class FlexHCD(SampleChanger):
     @task
     def enable_power(self):
         self._execute_cmd("enablePower", 1)
+        self._execute_cmd("setSpeed", 100)
 
     @task
     def defreeze(self):
@@ -269,6 +270,8 @@ class FlexHCD(SampleChanger):
         self._execute_cmd('unloadSample', sample.getCellNo(), sample.getBasketNo(), sample.getVialNo())
         if self._execute_cmd("get_loaded_sample") == (-1,-1,-1):
             self._resetLoadedSample()
+            if self.controller:
+                self.controller.prepare_flex(release_interlock=True)
             return True
         return False
 
